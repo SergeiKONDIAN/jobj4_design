@@ -31,7 +31,7 @@ class BackwardArrayItTest {
     }
 
     @Test
-    void whenReadSequence() {
+    void whenNext() {
         BackwardArrayIt it = new BackwardArrayIt(
                 new int[] {1, 2, 3}
         );
@@ -39,6 +39,24 @@ class BackwardArrayItTest {
         assertThat(it.next()).isEqualTo(2);
         assertThat(it.next()).isEqualTo(1);
         assertThat(it.hasNext()).isFalse();
+    }
+
+    @Test
+    void whenTrue() {
+        BackwardArrayIt it = new BackwardArrayIt(
+                new int[] {1, 2, 3}
+        );
+        assertThat(it.next()).isEqualTo(3);
+        assertThat(it.next()).isEqualTo(2);
+        assertThat(it.next()).isEqualTo(1);
+    }
+
+    @Test
+    void whenReadSequence() {
+        BackwardArrayIt it = new BackwardArrayIt(
+                new int[] {1, 2, 3}
+        );
+        assertThat(it.hasNext()).isTrue();
     }
 
     @Test
