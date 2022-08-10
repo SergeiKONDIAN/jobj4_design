@@ -12,14 +12,20 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
-        this.size = 0;
-        this.modCount = 0;
+    }
+
+    private void enlargeCapacity() {
+        if (container.length != 0) {
+            container = Arrays.copyOf(container, container.length * 2);
+        } else {
+            container = Arrays.copyOf(container, 2);
+        }
     }
 
     @Override
     public void add(T value) {
         if (size + 1 == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            enlargeCapacity();
         }
         container[size] = value;
         size++;
@@ -28,16 +34,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T removed = container[index];
+        T removed = get(index);
         container[index] = newValue;
         return removed;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T rsl = container[index];
+        T rsl = get(index);
         System.arraycopy(
                 container,
                 index + 1,
@@ -66,10 +70,13 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     public Iterator<T> iterator() throws NoSuchElementException, ConcurrentModificationException {
         return new Iterator<T>() {
             private int expectedModCount = modCount;
-            private int point = 0;
+            private int point;
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return point < size;
             }
 
@@ -78,12 +85,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 return container[point++];
             }
-
         };
     }
 }
