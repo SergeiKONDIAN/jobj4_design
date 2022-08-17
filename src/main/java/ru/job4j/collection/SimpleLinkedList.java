@@ -9,18 +9,21 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private int size;
     private int modCount;
     private Node<E> first;
-    private Node<E> last;
 
     @Override
     public void add(E value) {
-        Node<E> l = last;
-        Node<E> newNode = new Node<>(l, value, null);
-        last = newNode;
-        if (l == null) {
+        Node<E> newNode = new Node<>(value, null);
+        if (first == null) {
             first = newNode;
-        } else {
-            l.next = newNode;
+            size++;
+            modCount++;
+            return;
         }
+        Node<E> last = first;
+        while (last.next != null) {
+            last = last.next;
+        }
+        last.next = newNode;
         size++;
         modCount++;
     }
@@ -28,17 +31,9 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> ans;
-        if (index < (size >> 1)) {
-            ans = first;
-            for (int i = 0; i < index; i++) {
-                ans = ans.next;
-            }
-        } else {
-            ans = last;
-            for (int i = size - 1; i > index; i--) {
-                ans = ans.prev;
-            }
+        Node<E> ans = first;
+        for (int i = 0; i < index; i++) {
+            ans = ans.next;
         }
         return ans.item;
     }
@@ -63,7 +58,7 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
                     throw new NoSuchElementException();
                 }
                 E ans = point.item;
-                point = (point.next == null) ? null : point.next;
+                point = point.next;
                 return ans;
             }
         };
@@ -72,12 +67,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private static class Node<E> {
         E item;
         Node<E> next;
-        Node<E> prev;
 
-        Node(Node<E> prev, E element, Node<E> next) {
+        Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 }
