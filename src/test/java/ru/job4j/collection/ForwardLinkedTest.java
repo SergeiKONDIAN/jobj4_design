@@ -49,4 +49,28 @@ class ForwardLinkedTest {
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next()).isEqualTo(10);
     }
+
+    @Test
+    void whenSize0ThenReturnFalse() {
+        linked.deleteFirst();
+        linked.deleteFirst();
+        linked.deleteFirst();
+        linked.deleteFirst();
+        assertThat(linked.revert()).isFalse();
+    }
+
+    @Test
+    void whenSize1ThenReturnFalse() {
+        linked.deleteFirst();
+        linked.deleteFirst();
+        linked.deleteFirst();
+        assertThat(linked.revert()).isFalse();
+    }
+
+    @Test
+    void whenAddAndRevertTrue() {
+        assertThat(linked).containsSequence(1, 2, 3, 4);
+        assertThat(linked.revert()).isTrue();
+        assertThat(linked).containsSequence(4, 3, 2, 1);
+    }
 }
