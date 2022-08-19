@@ -12,6 +12,10 @@ public class SimpleQueue<T> {
         if (sizeIn == 0 && sizeOut == 0) {
             throw new NoSuchElementException();
         }
+        if (sizeOut > 0) {
+            sizeOut--;
+            return out.pop();
+        }
         while (sizeIn != 0) {
             out.push(in.pop());
             sizeIn--;
