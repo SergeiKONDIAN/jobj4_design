@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BoxTest {
+
     @Test
     void isThisSphere() {
         Box box = new Box(0, 10);
@@ -58,13 +59,13 @@ class BoxTest {
 
     @Test
     void checkSphereArea() {
-        Box box = new Box(0,3);
+        Box box = new Box(0, 3);
         assertThat(box.getArea()).isEqualTo(4 * Math.PI * 3 * 3);
     }
 
     @Test
     void checkUnknownArea() {
-        Box box = new Box(2,3);
+        Box box = new Box(2, 3);
         assertThat(box.getArea()).isEqualTo(0);
     }
 }
