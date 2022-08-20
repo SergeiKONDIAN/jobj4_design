@@ -11,17 +11,11 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean add(T value) {
-        boolean duplicate = false;
-        for (T t : set) {
-            if (Objects.equals(t, value)) {
-                duplicate = true;
-                break;
-            }
-        }
-        if (!duplicate) {
+        boolean originalValue = !contains(value);
+        if (originalValue) {
             set.add(value);
         }
-        return !duplicate;
+      return originalValue;
     }
 
     @Override
