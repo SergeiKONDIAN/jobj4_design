@@ -27,7 +27,7 @@ class SimpleConvertTest {
         assertThat(list).hasSize(5)
                 .contains("three")
                 .doesNotContain("two")
-                .containsAnyOf( "four", "ten")
+                .containsAnyOf("four", "ten")
                 .last().isEqualTo("five");
     }
 
