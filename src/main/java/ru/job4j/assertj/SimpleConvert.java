@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SimpleConvert {
-    //private final String[]
 
     public String[] toArray(String... example) {
         return example;
