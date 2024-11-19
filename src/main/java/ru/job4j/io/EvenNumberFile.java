@@ -6,7 +6,7 @@ import java.io.IOException;
 public class EvenNumberFile {
     public static void main(String[] args) {
         StringBuilder text = new StringBuilder();
-        try (FileInputStream in = new FileInputStream("even.txt")) {
+        try (FileInputStream in = new FileInputStream("data/even.txt")) {
             int read;
             while ((read = in.read()) != -1) {
                 text.append((char) read);
