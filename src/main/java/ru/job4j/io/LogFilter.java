@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogFilter {
+    private final String file;
 
-    public List<String> filter(String file) {
+    public LogFilter(String file) {
+        this.file = file;
+    }
+
+    public List<String> filter() {
         List<String> rsl = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(this.file))) {
             rsl = in.lines()
                     .filter(s -> s.matches(".+ 404 .+"))
                     .toList();
@@ -20,8 +25,8 @@ public class LogFilter {
     }
 
     public static void main(String[] args) {
-        LogFilter logFilter = new LogFilter();
-        List<String> log = logFilter.filter("log.txt");
+        LogFilter logFilter = new LogFilter("data/log.txt");
+        List<String> log = logFilter.filter();
         for (String s : log) {
             System.out.println(s);
         }
