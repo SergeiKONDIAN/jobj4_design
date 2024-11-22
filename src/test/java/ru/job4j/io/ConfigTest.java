@@ -22,6 +22,13 @@ class ConfigTest {
     }
 
     @Test
+    void whenNoKey() {
+        String path = "./data/ConfigTest/noKey.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void whenNoValue() {
         String path = "./data/ConfigTest/noValue.properties";
         Config config = new Config(path);
