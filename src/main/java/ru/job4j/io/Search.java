@@ -9,9 +9,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException, IllegalArgumentException {
-        Search.chechForArgs(args);
-        Search.chechStartFolder(args[0]);
-        Search.chechFileExtension(args[1]);
+        Search.chechArgs(args);
         Path start = Paths.get(args[0]);
         search(start, path -> path.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
@@ -22,22 +20,17 @@ public class Search {
         return searcher.getPaths();
     }
 
-    private static void chechForArgs(String[] args) throws IllegalArgumentException {
+    public static void chechArgs(String[] args) throws IllegalArgumentException {
         if (args.length != 2) {
             throw new IllegalArgumentException("Incorrect arguments! For search input "
                     + "start folder and file extension");
         }
-    }
-
-    private static void chechStartFolder(String arg) throws IllegalArgumentException {
-        if (!Files.isDirectory(Paths.get(arg))) {
+        if (!Files.isDirectory(Paths.get(args[0]))) {
             throw new IllegalArgumentException("Incorrect start folder!");
         }
-    }
-
-    private static void chechFileExtension(String arg) throws IllegalArgumentException {
-        if (!arg.startsWith(".")) {
+        if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("Incorrect file extension!");
         }
     }
 }
+
