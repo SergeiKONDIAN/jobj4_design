@@ -9,6 +9,26 @@ public class Store {
     private Manager manager;
     private String[] goodsList;
 
+    public boolean getWorkStatus() {
+        return workStatus;
+    }
+
+    public int getStoreNumber() {
+        return storeNumber;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public String[] getGoodsList() {
+        return goodsList;
+    }
+
     public Store(boolean workStatus, int storeNumber, String storeName, Manager manager, String[] goodsList) {
         this.workStatus = workStatus;
         this.storeNumber = storeNumber;
