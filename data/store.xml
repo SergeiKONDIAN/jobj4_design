@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<store workStatus="true" storeNumber="51" storeName= "Zarya">
+    <manager>
+        <managerName>Bob</managerName>
+        <managerPhone>1111-11-11</managerPhone>
+    </manager>
+    <goods>
+        <good>bread</good>
+        <good>cheese</good>
+    </goods>
+</store>
